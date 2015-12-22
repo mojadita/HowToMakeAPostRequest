@@ -10,6 +10,8 @@
  */
 package my.domain.http.client;
 
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -30,7 +32,7 @@ public class MainHTTPClient {
             // This is the data (json text) we are going to send.
             // We need to know it in advance to calculate the
             // Content-length header.
-            String content="{'field_a': 'Arriba Cachipurriana'}\n";
+            String content="{'field_a': 'Arriba Cachipurriana'}";
          
             // Get the connection to the server.
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -40,7 +42,10 @@ public class MainHTTPClient {
             
             // content headers to send a fixed length text.
             conn.setRequestProperty("content-type", "text/json");
-            conn.setRequestProperty("content-length", "" + content.length());
+            conn.setDoOutput(true);
+            PrintStream o = new PrintStream(conn.getOutputStream());
+            o.print(content);
+            o.close();
             
             conn.connect();
             
