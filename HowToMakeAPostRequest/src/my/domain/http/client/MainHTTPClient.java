@@ -9,6 +9,9 @@
  */
 package my.domain.http.client;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * @author Luis Colorado <code>&lt;lc@luiscoloradosistemas.com&gt;</code>}
@@ -17,8 +20,28 @@ package my.domain.http.client;
 public class MainHTTPClient {
 
     public static void main( String[] args ) {
-        // TODO Auto-generated method stub
+        final URL URL_TO_POST = new URL("http://host.to.post/");
+        HttpURLConnection conn = new HttpURLConnection(URL_TO_POST) {
 
+            @Override
+            public void disconnect() {
+                // TODO Auto-generated method stub
+                
+            }
+
+            @Override
+            public boolean usingProxy() {
+                // TODO Auto-generated method stub
+                return false;
+            }
+
+            @Override
+            public void connect() throws IOException {
+                // TODO Auto-generated method stub
+                
+            }
+            
+        };
     }
 
 }
