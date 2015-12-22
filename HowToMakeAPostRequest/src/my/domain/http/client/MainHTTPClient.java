@@ -11,6 +11,7 @@ package my.domain.http.client;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -20,28 +21,17 @@ import java.net.URL;
 public class MainHTTPClient {
 
     public static void main( String[] args ) {
-        final URL URL_TO_POST = new URL("http://host.to.post/");
-        HttpURLConnection conn = new HttpURLConnection(URL_TO_POST) {
-
-            @Override
-            public void disconnect() {
-                // TODO Auto-generated method stub
-                
-            }
-
-            @Override
-            public boolean usingProxy() {
-                // TODO Auto-generated method stub
-                return false;
-            }
-
-            @Override
-            public void connect() throws IOException {
-                // TODO Auto-generated method stub
-                
-            }
-            
-        };
+        try {
+            URL url = new URL("http://host.to.post/");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+        } catch (MalformedURLException e) {
+            /* TODO Auto-generated catch block */
+            e.printStackTrace();
+        } catch (IOException e) {
+            /* TODO Auto-generated catch block */
+            e.printStackTrace();
+        }
     }
 
 }
